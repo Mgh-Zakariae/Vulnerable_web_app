@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create account</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+        }
+
+        .register-container {
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="d-flex justify-content-center align-items-center">
+
+    <div class="register-container" style="width: 500px; max-width: 100%;">
+        <h2 class="text-center mb-4">Create your account</h2>
+        {% for message in messages %}
+        <p class="text-center" style="color: red;">{{ message }}</p>
+        {% endfor %}
+
+
+        <form name="registerUser" method="POST">
+            {% csrf_token %}
+            <!-- Name -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Full Name</label>
+                <input name="username" type="text" class="form-control" id="username" placeholder="Enter your name"
+                    required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input name="email" type="text" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input name="password" type="password" class="form-control" id="password"
+                        placeholder="Enter your password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <!-- Register Button -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+            <!-- Already have an account? -->
+            <p class="text-center mt-3">
+                Already have an account? <a href="{% url 'login' %}">Login</a>
+            </p>
+        </form>
+    </div>
+
+    <!-- Password Visibility Toggle -->
+    <script>
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            let passwordField = document.getElementById("password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+            } else {
+                passwordField.type = "password";
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

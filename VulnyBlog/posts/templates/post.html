@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Post Details</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a style="font-size: 40px; font-weight:500;" class="navbar-brand" href="{% url 'posts' %}">VulnyBlog</a>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'createPost' %}">Create Post</a>
+                        </li>
+                        {% endif %}
+        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myPost' %}">My posts</a>
+                        </li>
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Lougout</a>
+                        </li>
+                        {% endif %}
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
+        
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                        {% endif %}
+        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Post Title -->
+                <h1 class="text-center mb-4">{{post.title}}</h1>
+                <p>
+                    {{post.content}}
+                </p>
+                <p class="text-danger fw-bold" >Created by :{{post.author}}</p>
+                <p class="text-muted" style="font-size: small;">{{post.created_at}}</p>
+
+                <!-- Comments Section -->
+                <div class="mt-5">
+                    <h3 class="mb-3">Comments</h3>
+
+                    <!-- Comment List -->
+
+                    {% for user_id, user_data in comment.items %}
+                    {% for cm in user_data.comments%}
+                    <div class="border p-3 mb-3">
+                        <strong style="display: block;">{{user_data.user.username}}</strong>
+                        <p>{{ cm.content|safe }}</p>
+                    </div>
+                    {% endfor %}
+                    {% endfor%}
+
+                    <!-- Add a Comment -->
+                    <form method="POST" class="mt-4">
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Leave a Comment:</label>
+                            <textarea name="comment" class="form-control" id="comment" rows="3"
+                                placeholder="Write your comment here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+
+                <!-- Back Button -->
+                <a href="{% url 'posts' %}" class="btn btn-secondary mt-3" style="margin-bottom: 10px;">← Back to
+                    Posts</a>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

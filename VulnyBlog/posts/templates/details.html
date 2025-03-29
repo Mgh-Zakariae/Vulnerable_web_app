@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Details</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Optional: Custom CSS for "Windows" style -->
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    
+        .post-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+    
+        .header-bar {
+            background-color: #0078d4;
+            height: 40px;
+            border-radius: 10px 10px 0 0;
+            color: white;
+            padding: 8px 12px;
+        }
+    
+        .category-badge {
+            background-color: #228402e1;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+    
+        .content {
+            padding-top: 15px;
+        }
+    
+        .post-author {
+            color: #0078d4;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    
+        .post-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container-fluid">
+                <a style="font-size: 40px; font-weight:500;" class="navbar-brand" href="{% url 'posts' %}">VulnyBlog</a>
+        
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'createPost' %}">Create Post</a>
+                        </li>
+                        {% endif %}
+        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myPost' %}">My posts</a>
+                        </li>
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Lougout</a>
+                        </li>
+                        {% endif %}
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
+        
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                        {% endif %}
+        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="post-card mt-2">
+            <!-- Header bar with title -->
+            <div class="header-bar">
+                <span>Post Details</span>
+            </div>
+
+            <!-- Post content -->
+            <div class="content">
+                <div class="post-title">{{ data.0.1 }}</div>
+                <div class="post-author" style="font-size:small">created at : {{ data.0.3 }}</div>
+                <div class="post-author" style="font-size:small">Last update : {{ data.0.4 }}</div>
+                <div class="mt-3">
+                    <span class="category-badge">{{ data.0.6 }}</span>
+                </div>
+                <p class="mt-3">{{ data.0.2 }}</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'myPost' %}" class="btn btn-secondary ms-2">Go back</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

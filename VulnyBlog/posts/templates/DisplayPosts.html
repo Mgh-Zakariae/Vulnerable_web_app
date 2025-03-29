@@ -1,0 +1,81 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Posts</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</head>
+
+<body class="bg-light">
+
+    <div class="container">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a style="font-size: 40px; font-weight:500;" class="navbar-brand" href="{% url 'posts' %}">VulnyBlog</a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'createPost' %}">Create Post</a>
+                        </li>
+                        {% endif %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myPost' %}">My posts</a>
+                        </li>
+                        {% if islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Lougout</a>
+                        </li>
+                        {% endif %}
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        {% endif %}
+
+                        {% if not islogin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <h2 class="text-center mb-4">Latest Posts</h2>
+
+        <div class="row">
+
+            {% if data%}
+            {% for e in data %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ e.title }}</h5>
+                        <p class="card-text text-truncate">{{ e.content|slice:":90" }}...</p>
+                        <!-- fw-bold" >Created by : -->
+                        <p class="fw-semibold text-danger" style="font-size: small;" >Created by :{{ e.category }}</p>
+                        <p class="text-muted" style="font-size: small;">{{ e.created_at }}</p>
+                        <a href="posts/{{ e.id }}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+
+</html>

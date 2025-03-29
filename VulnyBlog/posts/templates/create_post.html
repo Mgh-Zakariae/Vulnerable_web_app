@@ -1,0 +1,79 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</head>
+<body class="bg-light">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light">
+                <div class="container-fluid">
+                    <a style="font-size: 40px; font-weight:500;" class="navbar-brand" href="{% url 'posts' %}">VulnyBlog</a>
+            
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            {% if islogin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'createPost' %}">Create Post</a>
+                            </li>
+                            {% endif %}
+            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'myPost' %}">My posts</a>
+                            </li>
+                            {% if islogin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'logout' %}">Lougout</a>
+                            </li>
+                            {% endif %}
+                            {% if not islogin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            </li>
+                            {% endif %}
+            
+                            {% if not islogin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                            </li>
+                            {% endif %}
+            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class=" p-4">
+                <h2 class="text-center mb-4">Create a New Post</h2>
+                <form action="#" method="POST">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Post Title</label>
+                        <input type="text" id="title" name="title" class="form-control" placeholder="Enter post title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea id="content" name="content" rows="6" class="form-control"
+                            placeholder="Write your post content here..." required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <input type="text" id="category" name="category" class="form-control" placeholder="Enter post category">
+
+                    </div>
+                    <!-- <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input type="file" id="image" name="image" class="form-control">
+                    </div> -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5">Publish</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</body>
+</html>

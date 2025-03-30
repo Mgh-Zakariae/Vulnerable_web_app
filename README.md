@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
-2. [Project Objectives](#project-objectives)
-3. [System Architecture](#system-architecture)
-4. [Technologies Used](#technologies-used)
-5. [Implementation Details](#implementation-details)
-    - [Database Design](#database-design)
+1. [Introduction](#1-introduction)
+2. [Project Objectives](#2-project-objectives)
+3. [System Architecture](#3-system-architecture)
+4. [Technologies Used](#4-technologies-used)
+5. [Implementation Details](#5-implementation-details)
+    - [Database Design](#6-database-design)
     - [Backend Functionality](#backend-functionality)
     - [Dockerization](#dockerization)
     - [Deployment](#deployment)

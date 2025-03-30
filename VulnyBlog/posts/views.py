@@ -73,6 +73,8 @@ def my_posts(req):
     
     if 'date' in sort_by:
         sort_by = 'created_at'
+    if not sort_by:
+        sort_by='title'
         
     if islogin:
         id_user = req.session.get('user_id')

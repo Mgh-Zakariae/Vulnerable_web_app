@@ -1,5 +1,22 @@
 # Vulnerable Blog Website - Docker Project
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Project Objectives](#project-objectives)
+3. [System Architecture](#system-architecture)
+4. [Technologies Used](#technologies-used)
+5. [Implementation Details](#implementation-details)
+    - [Database Design](#database-design)
+    - [Backend Functionality](#backend-functionality)
+    - [Dockerization](#dockerization)
+    - [Deployment](#deployment)
+6. [SQL Injection Vulnerabilities and Prevention](#sql-injection-vulnerabilities-and-prevention)
+    - [SQL Injection in the Project](#sql-injection-in-the-project)
+    - [Preventing SQL Injection](#preventing-sql-injection)
+7. [Testing and Validation](#testing-and-validation)
+8. [Conclusion](#conclusion)
+
 ## 1. Introduction
 
 This report presents the development of a **blog web application** implemented using **Django**, **MariaDB**, and deployed within a **Docker** container. The project aims to demonstrate web application development using modern containerized architectures while providing a controlled environment for security testing.

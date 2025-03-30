@@ -79,7 +79,7 @@ def my_posts(req):
         with connection.cursor() as con:
             query = f"SELECT * FROM accounts_post WHERE author_id = '{id_user}' ORDER BY {sort_by} DESC"
             con.execute(query)
-            print(query)
+            #print(query)
             result = con.fetchall()
         return render(req, 'myposts.html', {'posts': result, 'islogin': islogin})
     else:
